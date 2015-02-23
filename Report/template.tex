@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+
+%formating author affiliation
+\usepackage{authblk}
+\author[1]{(Jeremiah) Zhe Liu}
+\author[1]{Jing Wen}
+\author[2]{(Vivian) Wenwan Yang}
+\affil[1]{Department of Biostatistics, Harvard School of Public Health}
+\affil[2]{Department of Computer Science, Harvard School of Engineering and Applied Sciences}
+
+% change document font family to Palatino, and code font to Courier
+\usepackage{mathpazo} % add possibly `sc` and `osf` options
+\usepackage{eulervm}
+\usepackage{courier}
+%allow formula formatting
+
+%identation in nested enumerates
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{leftmargin=1cm} % level 1 list
+\setlist[enumerate,2]{leftmargin=2cm} % level 2 list
+
+%flush align equations to left, this also loads amsmath 
+\usepackage[fleqn]{mathtools}
+\usepackage{amsthm}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+\usepackage{comment}
+
+%declare math symbolz
+%# inner product
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+
+%declare argmin
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+%declare checkmark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+%title positon
+\usepackage{titling} %fix title
+\setlength{\droptitle}{-6em}   % Move up the title 
+
+%change section title font size
+\usepackage{titlesec} 
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{13}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{13}}{\thesubsubsection}{1em}{}
+
+%overwrite bfseries to allow formula in section title  
+\def\bfseries{\fontseries \bfdefault \selectfont \boldmath}
+
+% change page margin
+\usepackage[margin=0.8 in]{geometry} 
+
+%disable indentation
+\setlength\parindent{0pt}
+
+%allow inserting multiple graphs
+\usepackage{graphicx}
+\usepackage[skip=1pt]{subcaption}
+\usepackage[justification=centering,font=small]{caption}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}%indep sign
+
+%allow code chunks
+\usepackage{listings}
+%\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{frame=lrbt,xleftmargin=\fboxsep, xrightmargin=-\fboxsep}
+\lstset{language=R, commentstyle=\bfseries, 
+keywordstyle=\ttfamily} %R-related formatting
+\lstset{escapeinside={<@}{@>}}
+
+%allow merged cell in tables
+\usepackage{multirow}
+
+%allow http links
+\usepackage{hyperref}
+
+%allow different font colors
+\usepackage{xcolor}
+
+%Thm and Def environment
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{definition2}[1][Definition]{\begin{trivlist} %def without index
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newenvironment{example}[1][Example]{\begin{trivlist} %def without index
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% TItle page with contents %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\textbf{CS 181 Machine Learning}\\ \textbf{Practical 1 Report}}
+
+\pretitle{\begin{centering}\Large}
+\posttitle{\par\end{centering}}
+
+\date{\today}
+\vspace{-10em}
+\maketitle
+\vspace{-2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Formal Sections %%%%% %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\textbf{Data Description}}
+
+
+\section{\textbf{Model Choice and Justifications}}
+\subsection{\textbf{Technical Detail of Selected Model}}
+
+
+\section{\textbf{Parameter Selection}}
+\subsection{\textbf{Important Features}}
+\subsection{\textbf{Other Tunning Parameters}}
+
+
+
+\section{\textbf{Model Assessment}}
+
+\section{\textbf{Extra Considerations}}
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

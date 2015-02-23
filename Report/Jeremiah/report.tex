@@ -1,0 +1,286 @@
+\documentclass[11pt]{article}
+
+%formating author affiliation
+\usepackage{authblk}
+\author[1]{(Jeremiah) Zhe Liu}
+\author[1]{Jing Wen}
+\author[2]{(Vivian) Wenwan Yang}
+\affil[1]{Department of Biostatistics, Harvard School of Public Health}
+\affil[2]{Department of Computer Science, Harvard School of Engineering and Applied Sciences}
+
+% change document font family to Palatino, and code font to Courier
+\usepackage{mathpazo} % add possibly `sc` and `osf` options
+\usepackage{eulervm}
+\usepackage{courier}
+%allow formula formatting
+
+%identation in nested enumerates
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{leftmargin=1cm} % level 1 list
+\setlist[enumerate,2]{leftmargin=2cm} % level 2 list
+
+%flush align equations to left, this also loads amsmath 
+\usepackage[fleqn]{mathtools}
+\usepackage{amsthm}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+\usepackage{comment}
+
+%declare math symbolz
+%# inner product
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+
+%declare argmin
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+%declare checkmark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+%title positon
+\usepackage{titling} %fix title
+\setlength{\droptitle}{-6em}   % Move up the title 
+
+%change section title font size
+\usepackage{titlesec} 
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{13}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{13}}{\thesubsubsection}{1em}{}
+
+%overwrite bfseries to allow formula in section title  
+\def\bfseries{\fontseries \bfdefault \selectfont \boldmath}
+
+% change page margin
+\usepackage[margin=0.8 in]{geometry} 
+
+%disable indentation
+\setlength\parindent{0pt}
+
+%allow inserting multiple graphs
+\usepackage{graphicx}
+\usepackage[skip=1pt]{subcaption}
+\usepackage[justification=centering,font=small]{caption}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}%indep sign
+
+%allow code chunks
+\usepackage{listings}
+%\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{frame=lrbt,xleftmargin=\fboxsep, xrightmargin=-\fboxsep}
+\lstset{language=R, commentstyle=\bfseries, 
+keywordstyle=\ttfamily} %R-related formatting
+\lstset{escapeinside={<@}{@>}}
+
+%allow merged cell in tables
+\usepackage{multirow}
+
+%allow http links
+\usepackage{hyperref}
+
+%allow different font colors
+\usepackage{xcolor}
+
+%Thm and Def environment
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{definition2}[1][Definition]{\begin{trivlist} %def without index
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newenvironment{example}[1][Example]{\begin{trivlist} %def without index
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+%macros from Bob Gray
+\usepackage{"./macro/GrandMacros"}
+\usepackage{"./macro/Macro_BIO235"}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% TItle page with contents %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\textbf{CS 181 Machine Learning}\\ 
+\textbf{Practical 1 Report, Team Caffè breva}}
+
+\pretitle{\begin{centering}\Large}
+\posttitle{\par\end{centering}}
+
+\date{\today}
+\vspace{-10em}
+\maketitle
+\vspace{-2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Formal Sections %%%%% %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\section{\textbf{Background}}
+Solar photovoltaics is one of the most promising approaches for renewable energy, which is a method of converting the energy in the sun’s rays into electrical energy. As the development process for most modern solar cells is expensive and rigid, a machine learning process is desirable to rapidly identify molecular features that may determine their potential efficiency, measured by the difference in energy between the highest occupied molecular orbital (HOMO) and the lowest unoccupied molecular orbital (LUMO). In this report, we aim to predict the molecule HOMO-LUMO gap with pre-extracted molecule structure features using data from The Harvard Clean Energy Project. The feasibility of several popular machine-learning algorithms in current scenario will be considered and evaluated.
+\end{comment}
+
+\section{\textbf{Exploratory Analysis}}\label{sec:EDA}
+The training data set features the gap value (continuous) and 256 pre-extracted features regarding molecular strucuture  (binary) for 1,000,000 molecules. 
+
+The empirical distribution of energy gap is displayed in Figure \ref{fig:hist} (left). As shown, the distribution is unimodel and roughly symmetric, with slightly heavier tail in the positive direction. We thus conclude that the marginal distribution of {\tt gap} approximates a regular Gaussian distribution. Additionally, three negative records were observed. Since energy gap is defined as the difference between highest and lowest occupied molecular orbital, the negative values were considered illogical values and were hence removed from subsequent analysis.
+
+The distribution of extracted features were explored by considering $P({\tt feature_i} = 1)$ (shown in the textbox below). As shown, 225 out of 256 features have $P({\tt feature_i} = 1) = 0$ or 1, rendering them completely non-informative in prediction. Among the 31 remaining binary features, we  explored the unique combination of feature levels among all subjects. As a result, there exists only 4546 unique combinations among all subjects, with the frequency (i.e. number of subjects with that specific combination of features) of the 400 most frequent combinations visualized in Figure \ref{fig:hist} (right). As shown, combination frequency decreased quickly, with the 100 most frequent categories comprising of around 60\% of the total data, indicating a sparse input space with highly redundant information. 
+
+\begin{lstlisting}
+P(feature) = 0.000       Feature Freq: 225 
+P(feature) = 0.001       Feature Freq: 2 
+P(feature) = 0.005       Feature Freq: 1 
+P(feature) = 0.015       Feature Freq: 1 
+...
+P(feature) = 0.976       Feature Freq: 1 
+P(feature) = 0.996       Feature Freq: 1 
+P(feature) = 1.000       Feature Freq: 1 
+\end{lstlisting}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{"./plots/hist"}
+    \includegraphics[width=0.4\textwidth]{"./plots/freq"}
+    \caption{Empirical Distribution of Gaps (left) and the Frequency of unique combination of input features (right)}
+    \label{fig:hist}
+\end{figure}
+
+
+\newpage
+\section{\textbf{Model Choice and Justifications}}
+Based on observations from previous section, we realize that current learning task possesses below characteristics:\\
+
+1. Large Sample Size\\
+2. High dimensional, binary Input Space\\
+3. Complicated and unknown Feature-Outcome relation\\
+4. Prediction as the Learning Goal\\
+
+Based on above characteristics, we considered four classes of popular machine learning strategies as our potential model: regularized linear model (Ridge/LASSO), kernel methods (SVM/Gaussian Process), Bayesian methods, and random forest.
+
+We decided against using \textbf{regularized linear models} due to the biased nature of the estimators. For example, recall the form of the likelihood function and solution to Ridge regression:
+\begin{align*}
+L(\bw) &= \frac{1}{2} || \bT - \bX\bw||^2 + \frac{\lambda}{2}||\bw||_p\\
+\hat{\bw} &= (\bX^T\bX + \lambda \bI)^{-1}\bX^T\bt
+\end{align*}
+In order to specify a reasonable linear model, we have to include all possible n-level interactions between the 31 non-trivial features, which will necessarily result in a non-trivial $\lambda$ during the process of penalization. However, if the target values truely follow linear form, i.e. $\bt_{True} = \bX \bw_{True}$, we have:
+\begin{align*}
+\hat{\bt} = \bX\hat{\bw} =  \bX(\bX^T\bX + \lambda \bI)^{-1}\bX^T * (\bX \bw_{True}) \neq  \bX(\bX^T\bX)^{-1}\bX^T * (\bX \bw_{True}) = \bt_{True} 
+\end{align*}
+A simple eigen decomposition will illustrate that such bias increase with the magnitude of $\lambda$. We hence decide not to use regularized linear models since the interest lies in unbiased prediction of a potentially complex relationship. In practise, Ridge estimator gives Average Mean square Error (AME) around 0.29, offering inferior performance compared to the other algorithms.
+
+We also decided against using \textbf{Kernel-based methods} due to the large sample size. This is because instead of working with the design matrix, Kernel methods working with a $n \times n$ Kernel matrix of the form $\bK = \bPhi \bPhi^T$, where $\bPhi$ is a $n \times p$ kernel-transformed matrix of input features. Applying kernel matrix in current scenario implies working with a $1,000,000 \times 1,000,000$ potentially non-sparse matrix, whose computation cost is prohibitive for obvious reasons. 
+
+We also chose not to use \textbf{Bayesian Methods} due to our lack of prior knowledge with respect to the effect of each features. As a result, Bayesian regression doesn't seem to provide any benefit over regular models.
+
+As a result, we are left to choose \textbf{Random Forest} as our algorithm of choice. Introduced by Breiman and Cutler in 2001, random forest is essentially a ensemble method for regression trees. It offers a relatively  scalable algorithm which is robust against noisy observations / covariates and powerful in capturing complex interaction between features. This method is traditionally considered having superb performance in terms of prediction accuracy.
+
+\subsection{\textbf{Technical Detail of Random Forest}}
+In this practical, we adopted the implementation {\tt RandomForestRegressor} from {\tt scikit-learn 0.15.1}, which offers a paralleled implementation of the original algorithm described in Breiman (2001). We describe the pseudo code for this algorithm in \textbf{Appendix}, and discuss in this section several important parameters in the algorithm:\\
+
+\textbf{B (Number of Trees in Forest)}. \\
+One of the important features of random forest is it does not overfit, i.e. increasing the number of trees in forest does not overfit the data. Indeed, random forest estimate approximate the expectation of "real tree" conditional on the space of bootstrape samples $\hat{f}_{rf}(x) = E_{\Theta(\bZ)}T(x|\Theta(\bZ)) = \lim_{B \rightarrow \infty} \hat{f}(x)_{rf}^B$ (Hastie et al, 2009). Increase B will lead to a less biased and less noisy approximation of such value.\\
+
+\textbf{m (Number of Sampled Features)} \& \textbf{$d_{max}$ (Maximum Tree Depth)}. \\
+Although increase \textbf{B} will only bring estimator toward a constant limit, this limit itself, however, may overfit depending on $d_{max}$ and m. This is because intuitively, too deep a tree indicates a overly rich model, and too many considered feature increase correlation between generated trees. Both may incur unnecessary variance. It is thus crucial to perform parameter selection for \textbf{m} and \textbf{$d_{max}$} during model fitting.
+
+
+\section{\textbf{Parameter Selection}}
+\subsection{\textbf{Important Features}}
+
+As discussed in Section \ref{sec:EDA} (Exploratory Analysis). Only 31 features were considered important for the purpose of prediction. To validate this point, we first ran a naive random forest with default setting ($m = p, d_{max} = \infty$) and 100 trees, and consider the variable importance metric produced by this fit. Since the variable important for a specific feature  is constructed by considering in every tree the change in out-of-bag prediction error by setting the "effect" of this feature to 0, it is considered a cross-validated metric of the contribution of each features in terms of prediction. As a result, 227 features have variable importance $\leq 1e-5$ and were thus removed from the subsequent analysis. The 10-fold CV AME of the naive model is 0.272452, and we seek to improve our random forest model based upon this baseline.
+
+\subsection{\textbf{Tunning Parameters}}
+In the next step, we consider the effect of $\bm$ and $d_{max}$ in our prediction performance through 10-fold cross validation. With AME as the outcome metric, we seek to search over a grid of ($\bm$, $d_{max}$) since the convexity of the current problem is unclear. For regression problems, Breiman recommended setting $\bm = \frac{p}{3}$ and node size equal to 5, which equals to $\bm = 28/3 \approx 10$ and $d_{max} = log_2(1000000/5) \approx 17.6$. In practice, however, larger $\bm$ usually works better for more complex problems. We hence decide to search over the grid $\big[ \bm \in \{14, 16, ...., 28\} \big] \times \big[ d_{max} \in \{16, ...., 24\} \big]$ so that it covers a reasonable range of the theoretically sound values. The AME surface over candidate parameter values are visualized in Figure \ref{fig:par_select} and Table \ref{tb:par_select}. As a conclusion, we selected $(\bm = 19, d_{max} = 28)$. With the selected parameters, we ran a random forest with size $\bB$ = 2000 in order to achieve closest approximation toward the theoretical limit $E_{\Theta(\bZ)}T(x|\Theta(\bZ))$ within reasonable machine computing time (5 hours). The final 10-fold CV AME within training dataset is calculated to be 0.271845.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{"./plots/par_select"}
+    \includegraphics[width=0.45\textwidth]{"./plots/resid"}
+    \caption{\textbf{Left}: 10-fold CV Average Mean Square Error over candidate $(\bm, d_{max})$  grids\\
+    \textbf{Right}: Observed Gap value v.s. Prediction Bias}
+    \label{fig:par_select}
+\end{figure}
+
+\begin{table}[ht]
+\centering
+\resizebox{0.8\columnwidth}{!}{%
+\begin{tabular}{rrrrrrrrrr}
+  \hline
+$d_{max}$ &$\bm$ & 14 & 16 & 18 & 20 & 22 & 24 & 26 & 28 \\ 
+  \hline
+15 & & 0.272426 & 0.272423 & 0.272411 & 0.272421 & 0.272421 & 0.272419 & 0.272420 & 0.272427 \\ 
+  16 & & 0.272404 & 0.272410 & 0.272409 & 0.272410 & 0.272410 & 0.272409 & 0.272411 & 0.272411 \\ 
+  17 & & 0.272408 & 0.272404 & 0.272409 & 0.272405 & 0.272409 & 0.272408 & 0.272404 & 0.272415 \\ 
+  18 & & 0.272407 & 0.272407 & 0.272408 & 0.272410 & 0.272408 & 0.272408 & 0.272409 & 0.272408 \\ 
+  19 & & 0.272416 & 0.272405 & 0.272409 & 0.272412 & 0.272410 & 0.272413 & 0.272411 & 0.272403 \\ 
+  20 & & 0.272406 & 0.272410 & 0.272411 & 0.272408 & 0.272408 & 0.272407 & 0.272414 & 0.272415 \\ 
+  21 & & 0.272410 & 0.272408 & 0.272407 & 0.272409 & 0.272407 & 0.272414 & 0.272417 & 0.272411 \\ 
+  22 & & 0.272407 & 0.272406 & 0.272411 & 0.272407 & 0.272403 & 0.272409 & 0.272418 & 0.272407 \\ 
+  23 & & 0.272412 & 0.272405 & 0.272411 & 0.272409 & 0.272411 & 0.272407 & 0.272412 & 0.272415 \\ 
+  24 & & 0.272407 & 0.272411 & 0.272414 & 0.272410 & 0.272411 & 0.272407 & 0.272410 & 0.272409 \\ 
+   \hline
+\end{tabular}
+}
+\caption{10-fold CV Average Mean Square Error over candidate $(\bm, d_{max})$  grids}
+\label{tb:par_select}
+\end{table}
+
+\newpage
+\section{\textbf{Model Assessment and Discussion}}
+The observed gap value v.s. prediction bias (absolute value of residual) is visualized in Figure \ref{fig:par_select} (right). As shown, the prediction bias increases linearly when gap values are far from its mean, which is expected given the limited number of category combinations (4546 unique combinations compared to 1,000,000 observations) of extracted features, which only allowed the random forest to divide the input space into as many as 4546 subspaces and predict using local mean of each subspace, which is why  clusters of linearly increasing prediction bias are observed, indicating underfit due to limitation of the input space.
+
+Given the pre-extracted feature provided by this dataset, authors believe that  our current model should offer best possible performance in terms of prediction. However, prediction performance may be further improved by extracting more energy-relevant, and preferably continous features from the molecular structure. (e.g. using \textbf{RDKit} to extract from the SMILES string), and explore feature-outcome relationship  using again random forest to achieve a more satisfactory prediction result. Unfortunately, limited by the time and computing environment available to authors, above procedure was not carried out.
+
+\clearpage
+\section*{\textbf{Reference}}
+\begin{enumerate}
+\item L Breiman, “Random Forests”, Machine Learning, 45(1), 5-32, 2001. 
+\item T Hastie. R Tibshirani. J Friedman, "Elements of Statistical Learning", Springer, 2009.
+\end{enumerate}
+
+
+\section*{\textbf{Appendix: Algorithm for Random Forest}}
+\textbf{Input}: $\bZ = (\bt_{N \times 1}, \bX_{N \times p})$\\
+
+\textbf{Parameter}:\\
+$\bullet$ B: The number of trees in the forest\\
+$\bullet$ m: The number of features to sample when splitng nodes.\\
+$\bullet$ $d_{max}$: The maximal allowed depth of each tree. \\
+$\bullet$ $n_{min}$: The minimal allowed size the of the splitted node.\\
+
+\textbf{Algorithm}:
+\begin{enumerate}
+\item For b = 1 to B
+	\begin{enumerate}
+	\item Draw a bootstrap sample $\bZ^*$ of $\bZ$
+	\item (Grow a regression tree $T_b$ using $\bZ^*$)\\
+	Untile maximal depth of tree ($d_{max}$)/minimal size of node ($n_{min}$) is reached, for every node in current tree:
+	\begin{enumerate}
+		\item Randomly sample m features from the p features
+		\item Find optimal split (in the sense of minimizing RMSE) of current node with respect to select features.
+		\item Split the node into two daughter nodes.
+	\end{enumerate}
+	\end{enumerate}
+\item Output the ensemble of trees $\{T_b\}$ $b \in \{1, ..., B\}$.
+\item Predict for a new point $\bx$ as: 
+$\hat{f}(\bx) = \frac{1}{B} \sum_{b=1}^B T_b(\bx)$.
+\end{enumerate}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
