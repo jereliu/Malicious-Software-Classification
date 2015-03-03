@@ -103,6 +103,7 @@ def extract_feats(ffs, direc="train", global_feat_dict=None):
     classes = []
     ids = [] 
     for datafile in os.listdir(direc):
+        if datafile == "DS.Store": continue
         # extract id and true class (if available) from filename
         id_str,clazz = datafile.split('.')[:2]
         ids.append(id_str)
@@ -244,6 +245,8 @@ def main():
     X_train,global_feat_dict,t_train,train_ids = extract_feats(ffs, train_dir)
     print "done extracting training features"
     print
+    
+    X_train2 = X_train.todense()
     
     # TODO train here, and learn your classification parameters
     print "learning..."

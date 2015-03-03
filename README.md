@@ -10,7 +10,9 @@
 
 ## Logistics
 
-* Team name? High-level Expression
+* Team name: Advanced Representation
+* Deep Expression
+* Deep Ellum
 
 ## Tasklist
 1. Exploratory Analysis
