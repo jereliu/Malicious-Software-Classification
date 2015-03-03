@@ -76,8 +76,6 @@ except ImportError:
 import numpy as np
 from scipy import sparse
 
-os.chdir("/Users/Nika/Desktop/Class/Machine Learning/CS-181-Practical-2/Script/Jing Wen/")
-
 import util
 
 
@@ -232,8 +230,8 @@ def system_call_count_feats(tree):
 
 ## The following function does the feature extraction, learning, and prediction
 def main():
-    train_dir = "../../../Data/train"
-    test_dir = "../../../Data/test"
+    train_dir = "train"
+    test_dir = "test"
     outputfile = "mypredictions.csv"  # feel free to change this or take it as an argument
     
     # TODO put the names of the feature functions you've defined above in this list
