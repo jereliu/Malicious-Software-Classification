@@ -172,9 +172,11 @@ def make_design_mat(fds, global_feat_dict = None):
     assert len(cols) == len(rows) and len(rows) == len(data)
    
 
-    X = sparse.csr_matrix((np.array(data),
-                   (np.array(rows), np.array(cols))),
-                   shape=(len(fds), len(feat_dict)))
+    X = sparse.csr_matrix(
+    (np.array(data),(np.array(rows), np.array(cols))), 
+    shape=(len(fds), len(feat_dict))
+    )
+    
     return X, feat_dict
     
 
@@ -182,7 +184,7 @@ def make_design_mat(fds, global_feat_dict = None):
 # (i.e., the result of parsing an xml file) and returns a dictionary mapping 
 # feature-names to numeric values.
 ## TODO: modify these functions, and/or add new ones.
-def call_freq(tree, name_only = False, ):
+def call_freq(tree, name_only = False):
     """
     arguments:
       tree is an xml.etree.ElementTree object
@@ -212,7 +214,7 @@ def call_freq(tree, name_only = False, ):
         c = set(callz)
     else: 
         c = Counter()
-        for item in freqList: c[item[0]] = item[1]
+        for item in freqList: c[item[0]] = int(item[1])
 
     return c
 
@@ -280,18 +282,6 @@ def call_type(direc):
     return out_names
 
 
-def call_freq_total(direc):
-    names = set() # list of feature dicts
-    for datafile in os.listdir(direc)[0:10]:
-        if datafile == "DS.Store": continue
-        # parse file as an xml document
-        tree = ET.parse(os.path.join(direc,datafile))
-        # accumulate features
-        newnames = call_freq(tree)
-        names = names.union(newnames)
-    out_names = names
-    return out_names
-
 ## The following function does the feature extraction, learning, and prediction
 def main():
     train_dir = "../../../Data/train"
@@ -299,8 +289,8 @@ def main():
     outputfile = "../../Output/mypredictions.csv"  # feel free to change this or take it as an argument
     
     # TODO put the names of the feature functions you've defined above in this list
-    ffs = [first_last_system_call_feats, system_call_count_feats]
-    
+    ffs = [first_last_system_call_feats, system_call_count_feats, call_freq]
+
     # extract features
     print "extracting training features..."
     X_train,global_feat_dict,t_train,train_ids = extract_feats(ffs, train_dir)
