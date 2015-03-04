@@ -76,7 +76,7 @@ except ImportError:
 import numpy as np
 from scipy import stats
 from scipy import sparse
-
+from sklearn import ensemble as es
 os.chdir("/Users/Jeremiah/GitHub/CS-181-Practical-2/Script/Jeremiah")
 import util
 
@@ -286,7 +286,7 @@ def call_type(direc):
 def main():
     train_dir = "../../../Data/train"
     test_dir = "../../../Data/test"
-    outputfile = "../../Output/mypredictions.csv"  # feel free to change this or take it as an argument
+    outputfile = "../../Output/Jeremiah.csv"  # feel free to change this or take it as an argument
     
     # TODO put the names of the feature functions you've defined above in this list
     ffs = [first_last_system_call_feats, system_call_count_feats, call_freq]
@@ -294,14 +294,16 @@ def main():
     # extract features
     print "extracting training features..."
     X_train,global_feat_dict,t_train,train_ids = extract_feats(ffs, train_dir)
+    X_train_dense = X_train.todense()
     print "done extracting training features"
     print
-    
-    X_train2 = X_train.todense()
-    
+
     # TODO train here, and learn your classification parameters
     print "learning..."
-    learned_W = np.random.random((len(global_feat_dict),len(util.malware_classes)))
+    nForest = 1000
+    clf = es.RandomForestClassifier(n_estimators = nForest)
+    clf_fit = clf.fit(X_train_dense, t_train)
+    #learned_W = np.random.random((len(global_feat_dict),len(util.malware_classes)))
     print "done learning"
     print
     
@@ -311,17 +313,18 @@ def main():
     del train_ids
     print "extracting test features..."
     X_test,_,t_ignore,test_ids = extract_feats(ffs, test_dir, global_feat_dict=global_feat_dict)
+    X_test_dense = X_test.todense()
     print "done extracting test features"
     print
     
     # TODO make predictions on text data and write them out
     print "making predictions..."
-    preds = np.argmax(X_test.dot(learned_W),axis=1)
+    clf_preds = clf_fit.predict(X_test_dense)
     print "done making predictions"
     print
     
     print "writing predictions..."
-    util.write_predictions(preds, test_ids, outputfile)
+    util.write_predictions(clf_preds, test_ids, outputfile)
     print "done!"
 
 if __name__ == "__main__":
