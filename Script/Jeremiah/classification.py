@@ -74,6 +74,7 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 import numpy as np
+from scipy import stats
 from scipy import sparse
 
 os.chdir("/Users/Jeremiah/GitHub/CS-181-Practical-2/Script/Jeremiah")
@@ -126,7 +127,7 @@ def extract_feats(ffs, direc="train", global_feat_dict=None):
     return X, feat_dict, np.array(classes), ids
 
 
-def make_design_mat(fds, global_feat_dict=None):
+def make_design_mat(fds, global_feat_dict = None):
     """
     arguments:
       fds is a list of feature dicts (one for each row).
@@ -181,6 +182,41 @@ def make_design_mat(fds, global_feat_dict=None):
 # (i.e., the result of parsing an xml file) and returns a dictionary mapping 
 # feature-names to numeric values.
 ## TODO: modify these functions, and/or add new ones.
+def call_freq(tree, name_only = False, ):
+    """
+    arguments:
+      tree is an xml.etree.ElementTree object
+    returns:
+      a dictionary mapping 'first_call-x' to 1 if x was the first system call
+      made, and 'last_call-y' to 1 if y was the last system call made. 
+      (in other words, it returns a dictionary indicating what the first and 
+      last system calls made by an executable were.)
+    """
+    callz = []
+    in_all_section = False
+    first = True # is this the first system call
+    last_call = None # keep track of last call we've seen
+    for el in tree.iter():
+        # ignore everything outside the "all_section" element
+        if el.tag == "all_section" and not in_all_section:
+            in_all_section = True
+        elif el.tag == "all_section" and in_all_section:
+            in_all_section = False
+        elif in_all_section:
+            callz.append(el.tag)
+
+    # finally, count the frequencies
+    freqList = stats.itemfreq(callz)   
+    
+    if name_only == True:        
+        c = set(callz)
+    else: 
+        c = Counter()
+        for item in freqList: c[item[0]] = item[1]
+
+    return c
+
+
 def first_last_system_call_feats(tree):
     """
     arguments:
@@ -230,6 +266,31 @@ def system_call_count_feats(tree):
         elif in_all_section:
             c['num_system_calls'] += 1
     return c
+
+def call_type(direc):
+    names = set() # list of feature dicts
+    for datafile in os.listdir(direc):
+        if datafile == "DS.Store": continue
+        # parse file as an xml document
+        tree = ET.parse(os.path.join(direc,datafile))
+        # accumulate features
+        newnames = call_freq(tree)
+        names = names.union(newnames)
+    out_names = names
+    return out_names
+
+
+def call_freq_total(direc):
+    names = set() # list of feature dicts
+    for datafile in os.listdir(direc)[0:10]:
+        if datafile == "DS.Store": continue
+        # parse file as an xml document
+        tree = ET.parse(os.path.join(direc,datafile))
+        # accumulate features
+        newnames = call_freq(tree)
+        names = names.union(newnames)
+    out_names = names
+    return out_names
 
 ## The following function does the feature extraction, learning, and prediction
 def main():

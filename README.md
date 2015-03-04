@@ -19,8 +19,11 @@
 	* Outcome 
 		- [ ] Marginal Distribution
 		- [ ] Outlier
-	* Feature Selection
-		- [ ] What feature to extract? Marginal Distribution?
+	* Feature Space
+		- [ ] Matrix Representation
+		- [ ] Call Types?
+		- [ ] Call Frequency?
+ 		- [ ] What feature to extract? Marginal Distribution?
 		- [ ] Feature Importance from Random Forest
 		- [ ] Penalized Logistic Regression
 

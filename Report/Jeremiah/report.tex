@@ -2,8 +2,8 @@
 
 %formating author affiliation
 \usepackage{authblk}
-\author[1]{(Jeremiah) Zhe Liu}
 \author[1]{Jing Wen}
+\author[1]{(Jeremiah) Zhe Liu}
 \author[2]{(Vivian) Wenwan Yang}
 \affil[1]{Department of Biostatistics, Harvard School of Public Health}
 \affil[2]{Department of Computer Science, Harvard School of Engineering and Applied Sciences}
@@ -108,7 +108,7 @@ keywordstyle=\ttfamily} %R-related formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{\textbf{CS 181 Machine Learning}\\ 
-\textbf{Practical 1 Report, Team Caffè breva}}
+\textbf{Practical 1 Report, Team \textit{Advanced Representation}}}
 
 \pretitle{\begin{centering}\Large}
 \posttitle{\par\end{centering}}
@@ -122,36 +122,19 @@ keywordstyle=\ttfamily} %R-related formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% Formal Sections %%%%% %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
+
 \section{\textbf{Background}}
-Solar photovoltaics is one of the most promising approaches for renewable energy, which is a method of converting the energy in the sun’s rays into electrical energy. As the development process for most modern solar cells is expensive and rigid, a machine learning process is desirable to rapidly identify molecular features that may determine their potential efficiency, measured by the difference in energy between the highest occupied molecular orbital (HOMO) and the lowest unoccupied molecular orbital (LUMO). In this report, we aim to predict the molecule HOMO-LUMO gap with pre-extracted molecule structure features using data from The Harvard Clean Energy Project. The feasibility of several popular machine-learning algorithms in current scenario will be considered and evaluated.
-\end{comment}
+
 
 \section{\textbf{Exploratory Analysis}}\label{sec:EDA}
-The training data set features the gap value (continuous) and 256 pre-extracted features regarding molecular strucuture  (binary) for 1,000,000 molecules. 
 
-The empirical distribution of energy gap is displayed in Figure \ref{fig:hist} (left). As shown, the distribution is unimodel and roughly symmetric, with slightly heavier tail in the positive direction. We thus conclude that the marginal distribution of {\tt gap} approximates a regular Gaussian distribution. Additionally, three negative records were observed. Since energy gap is defined as the difference between highest and lowest occupied molecular orbital, the negative values were considered illogical values and were hence removed from subsequent analysis.
 
-The distribution of extracted features were explored by considering $P({\tt feature_i} = 1)$ (shown in the textbox below). As shown, 225 out of 256 features have $P({\tt feature_i} = 1) = 0$ or 1, rendering them completely non-informative in prediction. Among the 31 remaining binary features, we  explored the unique combination of feature levels among all subjects. As a result, there exists only 4546 unique combinations among all subjects, with the frequency (i.e. number of subjects with that specific combination of features) of the 400 most frequent combinations visualized in Figure \ref{fig:hist} (right). As shown, combination frequency decreased quickly, with the 100 most frequent categories comprising of around 60\% of the total data, indicating a sparse input space with highly redundant information. 
+\subsection{\textbf{Feature Extration through Matrix Representation}}
 
-\begin{lstlisting}
-P(feature) = 0.000       Feature Freq: 225 
-P(feature) = 0.001       Feature Freq: 2 
-P(feature) = 0.005       Feature Freq: 1 
-P(feature) = 0.015       Feature Freq: 1 
-...
-P(feature) = 0.976       Feature Freq: 1 
-P(feature) = 0.996       Feature Freq: 1 
-P(feature) = 1.000       Feature Freq: 1 
-\end{lstlisting}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.4\textwidth]{"./plots/hist"}
-    \includegraphics[width=0.4\textwidth]{"./plots/freq"}
-    \caption{Empirical Distribution of Gaps (left) and the Frequency of unique combination of input features (right)}
-    \label{fig:hist}
-\end{figure}
+Eigenvalue/Eigenvector
+
+Call Counts
 
 
 \newpage
@@ -199,39 +182,6 @@ As discussed in Section \ref{sec:EDA} (Exploratory Analysis). Only 31 features w
 
 \subsection{\textbf{Tunning Parameters}}
 In the next step, we consider the effect of $\bm$ and $d_{max}$ in our prediction performance through 10-fold cross validation. With AME as the outcome metric, we seek to search over a grid of ($\bm$, $d_{max}$) since the convexity of the current problem is unclear. For regression problems, Breiman recommended setting $\bm = \frac{p}{3}$ and node size equal to 5, which equals to $\bm = 28/3 \approx 10$ and $d_{max} = log_2(1000000/5) \approx 17.6$. In practice, however, larger $\bm$ usually works better for more complex problems. We hence decide to search over the grid $\big[ \bm \in \{14, 16, ...., 28\} \big] \times \big[ d_{max} \in \{16, ...., 24\} \big]$ so that it covers a reasonable range of the theoretically sound values. The AME surface over candidate parameter values are visualized in Figure \ref{fig:par_select} and Table \ref{tb:par_select}. As a conclusion, we selected $(\bm = 19, d_{max} = 28)$. With the selected parameters, we ran a random forest with size $\bB$ = 2000 in order to achieve closest approximation toward the theoretical limit $E_{\Theta(\bZ)}T(x|\Theta(\bZ))$ within reasonable machine computing time (5 hours). The final 10-fold CV AME within training dataset is calculated to be 0.271845.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.45\textwidth]{"./plots/par_select"}
-    \includegraphics[width=0.45\textwidth]{"./plots/resid"}
-    \caption{\textbf{Left}: 10-fold CV Average Mean Square Error over candidate $(\bm, d_{max})$  grids\\
-    \textbf{Right}: Observed Gap value v.s. Prediction Bias}
-    \label{fig:par_select}
-\end{figure}
-
-\begin{table}[ht]
-\centering
-\resizebox{0.8\columnwidth}{!}{%
-\begin{tabular}{rrrrrrrrrr}
-  \hline
-$d_{max}$ &$\bm$ & 14 & 16 & 18 & 20 & 22 & 24 & 26 & 28 \\ 
-  \hline
-15 & & 0.272426 & 0.272423 & 0.272411 & 0.272421 & 0.272421 & 0.272419 & 0.272420 & 0.272427 \\ 
-  16 & & 0.272404 & 0.272410 & 0.272409 & 0.272410 & 0.272410 & 0.272409 & 0.272411 & 0.272411 \\ 
-  17 & & 0.272408 & 0.272404 & 0.272409 & 0.272405 & 0.272409 & 0.272408 & 0.272404 & 0.272415 \\ 
-  18 & & 0.272407 & 0.272407 & 0.272408 & 0.272410 & 0.272408 & 0.272408 & 0.272409 & 0.272408 \\ 
-  19 & & 0.272416 & 0.272405 & 0.272409 & 0.272412 & 0.272410 & 0.272413 & 0.272411 & 0.272403 \\ 
-  20 & & 0.272406 & 0.272410 & 0.272411 & 0.272408 & 0.272408 & 0.272407 & 0.272414 & 0.272415 \\ 
-  21 & & 0.272410 & 0.272408 & 0.272407 & 0.272409 & 0.272407 & 0.272414 & 0.272417 & 0.272411 \\ 
-  22 & & 0.272407 & 0.272406 & 0.272411 & 0.272407 & 0.272403 & 0.272409 & 0.272418 & 0.272407 \\ 
-  23 & & 0.272412 & 0.272405 & 0.272411 & 0.272409 & 0.272411 & 0.272407 & 0.272412 & 0.272415 \\ 
-  24 & & 0.272407 & 0.272411 & 0.272414 & 0.272410 & 0.272411 & 0.272407 & 0.272410 & 0.272409 \\ 
-   \hline
-\end{tabular}
-}
-\caption{10-fold CV Average Mean Square Error over candidate $(\bm, d_{max})$  grids}
-\label{tb:par_select}
-\end{table}
 
 \newpage
 \section{\textbf{Model Assessment and Discussion}}
