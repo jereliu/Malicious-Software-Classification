@@ -606,8 +606,8 @@ def main():
     sys.stdout.flush()
     
     #prunning
-    X_train_prune, global_feat_dict_prune, prunId = \
-    pruneFeatures(minFreq = 5, X_train_dense = X_train_dense, \
+    X_train_prune, global_feat_dict_prune, featureFreq, prunId = \
+    pruneFeatures(minFreq = 1, X_train_dense = X_train_dense, \
                     global_feat_dict = global_feat_dict)
 
     ################################
