@@ -88,6 +88,9 @@ os.chdir("/Users/Jeremiah/GitHub/CS-181-Practical-2/Script/Jeremiah")
 import util
 import pandas as pd
 
+#plot
+from ggplot import *
+
 
 ################################################
 #### 1. Auxilliary Funcs #######################
@@ -587,14 +590,30 @@ def main():
     
     lesNames_byType_freq #most frequent commands in each class
     
-       
-    # TODO put the names of the feature functions you've defined above in this list
-    ffs = [first_last_system_call_feats, system_call_count_feats, \
-            call_freq, dll_type]#, get_all_keys]
+    
+    ##Bar plot
+    t_label = np.array(util.malware_classes)[np.array(t_train)] 
+    
+    
+    bar_df = stats.itemfreq(t_label).T
+    bar_df = stats.itemfreq(t_label).T
+    
+    
+    bar_df = pd.DataFrame(data= bar_df).T
+    bar_df.columns = ['name', 'count']
+    bar_df[['count']] = bar_df[['count']].astype(int)
+    
+    ggplot(aes(x = "name", weight = "count"), bar_df) + geom_bar()
+    
+    
     
     ################################
     #### Feature Extraction and Prunning 
     ################################
+
+    # TODO put the names of the feature functions you've defined above in this list
+    ffs = [first_last_system_call_feats, system_call_count_feats, \
+            call_freq, dll_type]#, get_all_keys]
 
     # extract features
     print "extracting training features..."

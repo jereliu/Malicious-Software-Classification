@@ -1,9 +1,12 @@
-\BOOKMARK [1][-]{section.1}{Background}{}% 1
-\BOOKMARK [1][-]{section.2}{Exploratory Analysis}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Feature Extration through Matrix Representation}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{Model Choice and Justifications}{}% 4
-\BOOKMARK [2][-]{subsection.3.1}{Technical Detail of Random Forest}{section.3}% 5
-\BOOKMARK [1][-]{section.4}{Parameter Selection}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Important Features}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Tunning Parameters}{section.4}% 8
-\BOOKMARK [1][-]{section.5}{Model Assessment and Discussion}{}% 9
+\BOOKMARK [1][-]{section.1}{Exploratory Analysis}{}% 1
+\BOOKMARK [1][-]{section.2}{Feature Extration}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Matrix Representaion of Extraction Target}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Feature Extraction and Prunning}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Model Choice and Justifications}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Technical Detail of Random Forest}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Model Choice and Justifications}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Technical Detail of Random Forest}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Parameter Selection}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Important Features}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{Tunning Parameters}{section.5}% 11
+\BOOKMARK [1][-]{section.6}{Model Assessment and Discussion}{}% 12

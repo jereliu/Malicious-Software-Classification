@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 MAR 2015 13:11
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 MAR 2015 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -434,8 +434,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
 \c@theorem=\count132
 
-(./macro/GrandMacros.sty) (./macro/Macro_BIO235.sty)
-No file report.aux.
+(./macro/GrandMacros.sty) (./macro/Macro_BIO235.sty) (./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
@@ -453,6 +452,7 @@ LaTeX Font Info:    ... okay on input line 105.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 105.
 LaTeX Font Info:    ... okay on input line 105.
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 105.
+
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
@@ -538,6 +538,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 105.
 LaTeX Info: Redefining \pageref on input line 105.
 LaTeX Info: Redefining \nameref on input line 105.
+
+(./report.out) (./report.out)
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
@@ -568,51 +570,48 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <14.4> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 119.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 126.
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 127.
  [1
 
 {/Users/Jeremiah/Library/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.
 map}]
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--148
+Underfull \hbox (badness 10000) in paragraph at lines 167--171
 
  []
 
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 151.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 169.
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 174.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 192.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--173
+Underfull \hbox (badness 10000) in paragraph at lines 194--196
 
  []
 
 [2]
 
-LaTeX Warning: Reference `sec:EDA' on page 3 undefined on input line 181.
-
-
-LaTeX Warning: Reference `fig:par_select' on page 3 undefined on input line 184
+LaTeX Warning: Reference `fig:par_select' on page 3 undefined on input line 207
 .
 
 
-LaTeX Warning: Reference `tb:par_select' on page 3 undefined on input line 184.
+LaTeX Warning: Reference `tb:par_select' on page 3 undefined on input line 207.
 
 
 [3]
 
-LaTeX Warning: Reference `fig:par_select' on page 4 undefined on input line 188
+LaTeX Warning: Reference `fig:par_select' on page 4 undefined on input line 211
 .
 
 [4]
@@ -623,45 +622,36 @@ Missing character: There is no ‚ in font pplr7t!
 Missing character: There is no Ä in font pplr7t!
 Missing character: There is no ù in font pplr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+Underfull \hbox (badness 10000) in paragraph at lines 224--225
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--208
+Underfull \hbox (badness 10000) in paragraph at lines 226--231
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 227.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
 [5
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 227.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 227.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: 7410E361381B3AA48E3E0040747D7CF2;830.
 
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  CEC983B9B9D2924D9048020C14A15D4A;598.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 227.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
  ) 
 Here is how much of TeX's memory you used:
- 11813 strings out of 493488
- 164528 string characters out of 3141326
- 283223 words of memory out of 3000000
- 14904 multiletter control sequences out of 15000+200000
+ 11835 strings out of 493488
+ 164795 string characters out of 3141326
+ 283374 words of memory out of 3000000
+ 14917 multiletter control sequences out of 15000+200000
  38047 words of font info for 110 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  42i,10n,41p,1264b,398s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -682,10 +672,10 @@ r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
 cal/texlive/2012/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/tex
 live/2012/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/local/texlive/2
 012/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on report.pdf (5 pages, 132207 bytes).
+Output written on report.pdf (5 pages, 133319 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 160 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 
