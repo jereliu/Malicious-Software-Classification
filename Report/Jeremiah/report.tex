@@ -125,18 +125,59 @@ keywordstyle=\ttfamily} %R-related formatting
 
 
 \section{\textbf{Exploratory Analysis}}\label{sec:EDA}
-This 
 
 The training data set features the malware class (14 discrete categories) and XML behavior log regarding 3086 execurables.
 
+The empirical distribution of malware classes is displayed in Figure 1. As shown, majority of malwares are of relatively low frequency ($< 2\%$), except {\tt Swizzor} (542, 17.56\%), {\tt VB} (376, 12.18\%), and {\tt Agent} (114, 3.69\%). 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccccccc}
+  \hline
+ & Agent & AutoRun & FraudLoad & FraudPack & Hupigon & Krap & Lipler  \\ 
+ & 114 & 50 & 37 & 32 & 41 & 39 & 53
+  \\ 
+ \hline
+& Magania & None & Poison & Swizzor & Tdss & VB & Virut & Zbot \\
+& 41 & 1609 & 21 & 542 & 32 & 376 & 59 & 40 \\   \hline
+\end{tabular}
+\end{table}
 
 
-\section{\textbf{Feature Extration}}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{"./plots/frequency"}
+    \caption{Emprical Count of Malware Types}
+    \label{fig:awesome_image}
+\end{figure}
 
+The Input space is comprised XML behavior logs of the executables, which are generated from sand-box type environment where all system calls (as well as  associated parameters and outcome status) of the executable are intercepted and reported in a structured XML file.  Due to the complicated nature of the input space (structured strings), in the next section we discuss possible representation of such space and how to embed it into a euclidean/categorical feature space.
+
+\newpage
+\section{\textbf{Embedding and Feature Extration}}
 
 \subsection{\textbf{Matrix Representaion of Extraction Target}}
 
+\begin{lstlisting}
+<load_image \
+  filename="c:\342c547b28e9517f6fcf6c703933c0d9.EX" \
+  successful="1" address="&#x24;400000" \
+  end_address="&#x24;414000" size="81920" \
+  filename_hash="hash_error"/>
+\end{lstlisting}
 
+Each XML log is consisted of a ordered set of structured report of system calls. As shown above, each call is consisted of a \textbf{operation type} (e.g. ${\tt load\_image}$), and \textbf{argument blocks} (e.g. {\tt filename, successful, end\_address, filename\_hash}). 
+
+We currently consider information contained in such XML file as a ordered set of python dictionaries. To reasonable represent such information in numeric form, Trinius et al (2009) argued that the parameters in each call can be stratified into multiple levels, with the supposedly most informative information (e.g. operation type) to be contained level 1, some less varying  argument blocks (e.g. the extension of loaded dll in {\t load\_dll}) to be contained in level 2, and the more varying, call-specific  (thus less informative) argument blocks to be contained in level 2 and beyond. This is the so-called Malware Instruction Set (MIST) representation.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{"./plots/MIST"}
+    \caption{Malware Instruction Set (MIST) representation of XML records}
+    \label{fig:awesome_image}
+\end{figure}
+
+In order to represent both \underline{the information} contained in each call and also \underline{the order} of the system call, we not only represent call-specific features, but also rep
 
 
 \subsection{\textbf{Feature Extraction and Prunning}}
@@ -220,6 +261,7 @@ Given the pre-extracted feature provided by this dataset, authors believe that  
 \begin{enumerate}
 \item L Breiman, “Random Forests”, Machine Learning, 45(1), 5-32, 2001. 
 \item T Hastie. R Tibshirani. J Friedman, "Elements of Statistical Learning", Springer, 2009.
+\item P Trinius et al, "A Malware Instruction Set for Behavior-Based Analysis", Technical Report, University of Mannheim, Germany, 2009
 \end{enumerate}
 
 

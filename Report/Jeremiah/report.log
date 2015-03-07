@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 MAR 2015 16:54
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 MAR 2015 22:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -434,7 +434,11 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
 \c@theorem=\count132
 
-(./macro/GrandMacros.sty) (./macro/Macro_BIO235.sty) (./report.aux)
+(./macro/GrandMacros.sty) (./macro/Macro_BIO235.sty) (./report.aux
+
+LaTeX Warning: Label `fig:awesome_image' multiply defined.
+
+)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
@@ -453,8 +457,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 105.
 LaTeX Font Info:    ... okay on input line 105.
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 105.
 
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 *geometry* driver: auto-detecting
@@ -571,50 +574,74 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <14.4> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 119.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 127.
- [1
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 131.
 
-{/Users/Jeremiah/Library/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.
-map}]
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 167--171
-
- []
-
-LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 174.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 192.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+<"./plots/frequency".png, id=52, 881.694pt x 341.8371pt>
+File: "./plots/frequency".png Graphic file (type png)
+
+<use "./plots/frequency".png>
+Package pdftex.def Info: "./plots/frequency".png used on input line 149.
+(pdftex.def)             Requested size: 398.93158pt x 154.66504pt.
+ [1
+
+{/Users/Jeremiah/Library/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.
+map} <./plots/frequency.png>]
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 169.
+LaTeX Font Info:    Try loading font information for OML+ppl on input line 171.
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/omlppl.fd
+File: omlppl.fd 
+)
+LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <10.95> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 171.
+
+<"./plots/MIST".png, id=67, 512.91624pt x 129.48375pt>
+File: "./plots/MIST".png Graphic file (type png)
+
+<use "./plots/MIST".png>
+Package pdftex.def Info: "./plots/MIST".png used on input line 175.
+(pdftex.def)             Requested size: 349.06227pt x 88.12086pt.
+ [2 <./plots/MIST.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--196
+Underfull \hbox (badness 10000) in paragraph at lines 211--215
 
  []
 
-[2]
 
-LaTeX Warning: Reference `fig:par_select' on page 3 undefined on input line 207
-.
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
+ []
 
 
-LaTeX Warning: Reference `tb:par_select' on page 3 undefined on input line 207.
+Underfull \hbox (badness 10000) in paragraph at lines 238--240
 
+ []
 
 [3]
 
-LaTeX Warning: Reference `fig:par_select' on page 4 undefined on input line 211
+LaTeX Warning: Reference `fig:par_select' on page 4 undefined on input line 251
 .
 
+
+LaTeX Warning: Reference `tb:par_select' on page 4 undefined on input line 251.
+
+
 [4]
+
+LaTeX Warning: Reference `fig:par_select' on page 5 undefined on input line 255
+.
+
+[5]
 Missing character: There is no ‚ in font pplr7t!
 Missing character: There is no Ä in font pplr7t!
 Missing character: There is no ú in font pplr7t!
@@ -622,60 +649,65 @@ Missing character: There is no ‚ in font pplr7t!
 Missing character: There is no Ä in font pplr7t!
 Missing character: There is no ù in font pplr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 226--231
+Underfull \hbox (badness 10000) in paragraph at lines 271--276
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
-[5
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+[6
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 7410E361381B3AA48E3E0040747D7CF2;830.
+(rerunfilecheck)             Checksum: 2AF77AA61D5D480D335F6A6518DBF12C;844.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
  ) 
 Here is how much of TeX's memory you used:
- 11835 strings out of 493488
- 164795 string characters out of 3141326
- 283374 words of memory out of 3000000
- 14917 multiletter control sequences out of 15000+200000
- 38047 words of font info for 110 fonts, out of 3000000 for 9000
+ 12594 strings out of 493488
+ 173092 string characters out of 3141326
+ 320505 words of memory out of 3000000
+ 15652 multiletter control sequences out of 15000+200000
+ 40245 words of font info for 119 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 42i,10n,41p,1264b,398s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,10n,41p,1264b,1693s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/amsfonts/euler/euex10.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/local/
-texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurb10.pfb></usr/loca
-l/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurb7.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/l
-ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurm7.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></us
-r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-</usr/local/texlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/lo
-cal/texlive/2012/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/local/texlive/2
-012/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on report.pdf (5 pages, 133319 bytes).
+xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
+live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texliv
+e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive
+/2012/texmf-dist/fonts/type1/public/amsfonts/euler/euex10.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/tex
+live/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/local/te
+xlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurb10.pfb></usr/local/
+texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurb7.pfb></usr/local
+/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/loc
+al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eurm7.pfb></usr/lo
+cal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/
+local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/loca
+l/texlive/2012/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/local/texlive/201
+2/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on report.pdf (6 pages, 194589 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 135 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 191 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 

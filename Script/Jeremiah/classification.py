@@ -596,14 +596,16 @@ def main():
     
     
     bar_df = stats.itemfreq(t_label).T
-    bar_df = stats.itemfreq(t_label).T
+    bar_df = stats.itemfreq(t_train).T
     
     
     bar_df = pd.DataFrame(data= bar_df).T
     bar_df.columns = ['name', 'count']
     bar_df[['count']] = bar_df[['count']].astype(int)
     
-    ggplot(aes(x = "name", weight = "count"), bar_df) + geom_bar()
+    ggplot(aes(x = "name", weight = "count"), bar_df) + \
+           xlab("count") + geom_bar() + \
+           ggtitle("Frequency Count for Malware Types")
     
     
     
