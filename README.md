@@ -11,9 +11,8 @@
 ## Logistics
 
 * Team name: Advanced Representation
-* Deep Expression
 * Deep Ellum
-* The Last Lady Macbeth
+* The Last Lady M/La dernière dame M
 
 ## Tasklist
 1. Exploratory Analysis
