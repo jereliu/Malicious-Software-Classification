@@ -566,7 +566,7 @@ def main():
     #Get types & fre of commands
     
     #raw count
-    lesNames =  call_freq(train_dir)
+    lesNames =  call_freq_emp(train_dir)
     lesNames_freq = pd.Series(lesNames.values(), lesNames.keys())
     lesNames_freq = lesNames_freq/sum(lesNames_freq)
     lesNames_freq.sort()

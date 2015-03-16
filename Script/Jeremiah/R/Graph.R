@@ -50,7 +50,8 @@ zMat <- matrix(dat$Mis_matches, nrow = length(d1),
                dimnames = list(unique(dat$max_features), 
                                unique(dat$max_depth)))
 
-xtable(zMat, digits = 6)
+
+xtable(zMat/3086, digits = 4)
 
 persp3D(x = d1, y = d2, z = zMat,
         theta = 30, phi = 30, 
